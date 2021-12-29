@@ -30,29 +30,32 @@ class winInteract:
         """
         win32gui.SetForegroundWindow(self.winHwnd)
 
+
     def liveScreen(self):
         hdesktop = win32gui.GetDesktopWindow()
         hwndDC = win32gui.GetWindowDC(hdesktop)
         mfcDC  = win32ui.CreateDCFromHandle(hwndDC)
         saveDC = mfcDC.CreateCompatibleDC()
 
+        """
+        Creates a screenshot of the desktop based on the width and height
+        given. We give the width and height and the position of the process
+        such that the windows api knows where to take the screenshot, and the
+        size thereof
+        """
         dataBitMap = win32ui.CreateBitmap()
         dataBitMap.CreateCompatibleBitmap(mfcDC, self.width, self.height)
 
         saveDC.SelectObject(dataBitMap)
         saveDC.BitBlt((0, 0), (self.width, self.height), mfcDC, (self.left, self.top), win32con.SRCCOPY)
 
-        signedIntsArray = dataBitMap.GetBitmapBits(True)
 
-        """
-        Shape the image based on its proportions
-        """
+        # Shape the image based on its proportions
+        signedIntsArray = dataBitMap.GetBitmapBits(True)
         img = np.fromstring(signedIntsArray, dtype="uint8")
         img.shape = (self.height, self.width, 4)
 
-        """
-        Free ressources not used anymore
-        """
+        # Free ressources not used anymore
         win32gui.DeleteObject(dataBitMap.GetHandle())
         saveDC.DeleteDC()
         mfcDC.DeleteDC()
@@ -63,13 +66,5 @@ class winInteract:
         Otherwise OpenCV will throw errors
         """
         img = img[...,:3]
-
-        """
-        Match template in OpenCV wants integers, but as of now
-        we're returning tuples, the next line is meant to deal
-        with this. For more information see the discussion here:
-        https://github.com/opencv/opencv/issues/14866#issuecomment-580207109
-        """
-        img = np.ascontiguousarray(img)
 
         return img

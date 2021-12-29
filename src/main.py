@@ -3,58 +3,30 @@ from ScreenToData import winInteract
 from DataToDetect import cvClick
 
 
-
-"""
-To DO:
-
-1. Fix positioning, so it's automatic
-2. Test cases where you take a picture
-of white with some black rectangles on it
-you want your CV model to see these and 
-return you the points. When you have
-the code that does this, incorporate it 
-into the DataToDetect class. Hopefully
-then it'll work alway. 
-
-3. Make it able to distinguish between
-holding and clicking
-
-4. Comment all the opencv code
-
-"""
-
-
-game = "Magic Music Tiles - Guitar & Piano Games"
-
-
 def main():
-    screenHandler = winInteract(game)
-    cvHandler = cvClick("Capture.png")
+   screenHandler = winInteract(game)
+   cvHandlerLong = cvClick("Capture.png")
+   cvHandlerTile = cvClick("temp.png")
 
-    while True:
-        tileData = screenHandler.liveScreen()
-        a = cvHandler.locateTiles(tileData)
+   while 1:
+      tileData = screenHandler.liveScreen()
 
-        try:
-            pos = a[0][0]+620, a[0][1]
-            print(pos)
-            A = 699
-            S = 833
-            D = 967
-            F = 1101
+      # Save the X- and Y-coordinates for the tiles
+      joinedCoords = cvHandlerLong.locateTiles(tileData) + cvHandlerTile.locateTiles(tileData)
 
-            if pos[0] == A:
-               pg.press("A") 
-            if pos[0] == S:
-               pg.press("S") 
-            if pos[0] == D:
-               pg.press("D") 
-            if pos[0] == F:
-               pg.press("F")
-            print(pos)
+      if len(joinedCoords):
+         clickStack = sorted(joinedCoords,key=lambda x: x[1], reverse=True) 
+         pos = clickStack[0][0]
 
-        except:
-            pass
+         if 30 < pos and pos < 150:
+            pg.press("A")
+         if 160 < pos and pos < 300:
+            pg.press("S")
+         if 310 < pos and pos < 400:
+            pg.press("D")
+         if 410 < pos and pos < 600:
+            pg.press("F")
 
 if __name__ == "__main__":
-    main()
+   game = "Magic Music Tiles - Guitar & Piano Games"
+   main()
