@@ -9,5 +9,5 @@ Now everything should be set and you'll be hitting new highscores!:) Depending o
 the images in `images/`.
 
 # Proof-Of-Concept
-![conceptgif](https://github.com/cavetownie/AutoTile/main/concept.gif)
+![conceptgif](https://github.com/cavetownie/AutoTile/main/blob/concept.gif)
 
