@@ -11,3 +11,4 @@ the images in `images/`.
 # Proof-Of-Concept
 ![conceptgif](https://github.com/cavetownie/AutoTile/blob/main/concept.gif)
 
+![scores](https://github.com/cavetownie/AutoTile/blob/main/scores.PNG)
