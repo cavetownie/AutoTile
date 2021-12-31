@@ -11,4 +11,7 @@ the images in `images/`.
 # Proof-Of-Concept
 ![conceptgif](https://github.com/cavetownie/AutoTile/blob/main/concept.gif)
 
+
+And the I was able to beat most of the games with three crowns. The scoring system was
+1 Star, 2, 3, 1 Crown, 2, 3
 ![scores](https://github.com/cavetownie/AutoTile/blob/main/scores.PNG)
