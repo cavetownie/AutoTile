@@ -42,8 +42,8 @@ def main():
    longPath = os.path.join(srcPath, "..\\images", "Capture.png")
    tilePath = os.path.join(srcPath, "..\\images", "522.png")
 
-   cvHandlerLong = cvClick(longPath)
-   cvHandlerTile = cvClick(tilePath)
+   cvHandlerLong = cvClick(longPath) # Initializes needle image
+   cvHandlerTile = cvClick(tilePath) 
 
    # Faster than while-True
    while 1:
